@@ -15,6 +15,7 @@
  */
 #include "logging.hpp"
 #include "LIEF/ELF/enums.hpp"
+#include <iostream>
 namespace LIEF {
 namespace ELF {
 
@@ -617,6 +618,7 @@ Segment& Binary::extend_segment<SEGMENT_TYPES::PT_LOAD>(const Segment& segment, 
 template<>
 Section& Binary::add_section<true>(const Section& section) {
   LIEF_DEBUG("Adding section '{}' as LOADED", section.name());
+  std::cout << "Adding section: "<< section.name << "as LOADED";
   // Create a Segment:
   Segment new_segment;
   new_segment.content(section.content());
@@ -667,7 +669,8 @@ Section& Binary::add_section<true>(const Section& section) {
 
 template<>
 Section& Binary::add_section<false>(const Section& section) {
-
+  std::cout << "yyyy\n";
+  std::cout << "Adding section: "<< section.name << "as LOADED";
   Section* new_section = new Section{section};
   new_section->datahandler_ = this->datahandler_;
 
